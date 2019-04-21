@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 
 class ShowList extends Component {
+  deleteRow(id){
+    this.props.deleteRow(id);
+  }
+
   render() {
     return (
       <div className="ShowList">
@@ -9,7 +13,7 @@ class ShowList extends Component {
             {this.props.list.map(item => (
               <div>
                 <li key={item}>{item}</li>
-                <button type= "button" onClick = {this.props.deleteRow(item)}/ >
+                <button type= "button" onClick = {this.deleteRow.bind(this, item)}>Delete</button>
               </div>
             ))}
           </ul>

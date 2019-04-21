@@ -22,9 +22,7 @@ class App extends Component {
   }
 
   handleDelete(id){
-    alert("ss");
-    debugger
-    this.setState({list: this.list.filter(el => el != id )})
+    this.setState({list: this.state.list.filter(el => el != id )})
   }
 
   render() {
