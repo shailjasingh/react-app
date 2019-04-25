@@ -5,19 +5,22 @@ import ShowList from './ShowList';
 class App extends Component {
   constructor() {
     super()
-    this.state = {value: '', list: []};
+    this.state = {value: '', list: [], mode: 'view'};
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);    
+    this.handleDelete = this.handleDelete.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);    
   }
   
   handleChange(event){
+    console.log('==========' + event.target.value + '============');
     this.setState({value: event.target.value});
   }
 
   handleSubmit(event){
     this.state.list.push(this.state.value)
     this.setState({list: this.state.list});
+    this.setState({mode: 'view'});
     event.preventDefault();
   }
 
@@ -25,9 +28,14 @@ class App extends Component {
     this.setState({list: this.state.list.filter(el => el != id )})
   }
 
+  handleEdit(id){
+    this.setState({mode: 'edit'});
+  }
+
   render() {
     return (
       <div className="App">
+        <h2>ToDo App </h2>
         <form onSubmit={this.handleSubmit}>
           <label>
             Name:
@@ -35,7 +43,7 @@ class App extends Component {
           </label>
           <input type="submit" value="Submit" />
         </form>
-        <ShowList list= {this.state.list}  deleteRow = {this.handleDelete}/>
+        <ShowList list= {this.state}  deleteRow = {this.handleDelete} editRow = {this.handleEdit} saveData = {this.handleSubmit} onChange = {this.handleChange} />
       </div>
     );
   }
